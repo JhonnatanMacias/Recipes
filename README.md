@@ -38,11 +38,23 @@ _Los datos vienen del servicio [https://my-json-server.typicode.com/ ](https://a
 Al iniciar el proyecto, se traen todos las receetas aleatorias del servicio,
 y se muestran en pantalla.
 
-Se puede abrir el post en detalle seleccionando
+Se puede abrir la receta en detalle seleccionando
 la receta y marcandolo como favorita.
 
 Al volver hacia la lista de recetas, un
 icono de estrella se mostrará en su lugar.
+
+Igualmente al presional en el boton de Search,
+enviará a la vista de busquedas, donde tendras que hacer scroll down para
+mostrar la barra de busquedas, al escribír una palabra y presionar en return o OK boton,
+se realizará la busqueda y mostrará los resultados.
+
+
+
+Igualmente se muestra un mensaje de error cuando ocurre uno.
+
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/2271138/198893605-b0b48efb-5782-43e8-a760-c65e88f8c05c.gif)
+
 
 ```
 
