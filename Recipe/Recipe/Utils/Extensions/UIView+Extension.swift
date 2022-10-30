@@ -43,4 +43,10 @@ extension UIView {
         return tableView
     }
 
+    class func newAutolayoutImageView() -> UIImageView {
+        let image : UIImageView = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }
+
 }

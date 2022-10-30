@@ -1,16 +1,26 @@
 PODS:
   - Alamofire (5.6.1)
+  - Atributika (4.10.1)
+  - SDWebImage (5.13.5):
+    - SDWebImage/Core (= 5.13.5)
+  - SDWebImage/Core (5.13.5)
 
 DEPENDENCIES:
   - Alamofire (~> 5.5)
+  - Atributika
+  - SDWebImage (~> 5.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Atributika
+    - SDWebImage
 
 SPEC CHECKSUMS:
   Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
+  Atributika: 47e778507cfb3cd2c996278b0285221a62e97d71
+  SDWebImage: 23d714cd599354ee7906dbae26dff89b421c4370
 
-PODFILE CHECKSUM: 5ee73ea75994308c4fbe093466d8d06233ab01f5
+PODFILE CHECKSUM: 7c6008bf1157cd31b6c08a699c9650e4af45c861
 
 COCOAPODS: 1.11.3

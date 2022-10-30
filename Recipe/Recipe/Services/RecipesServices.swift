@@ -11,7 +11,7 @@ import Foundation
 class RecipesServices: BaseService {
 
     struct Constants {
-        static let endPoint = "recipes/random?number=10"
+        static let endPoint = "recipes/random?number=30"
         static let baseURL = "https://api.spoonacular.com/"
     }
 

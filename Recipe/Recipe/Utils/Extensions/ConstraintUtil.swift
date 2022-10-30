@@ -274,6 +274,12 @@ import UIKit
                                   multiplier: 1.0, constant: height)
     }
 
+    open class func setMinBottom(_ height: CGFloat, toView view: UIView) -> NSLayoutConstraint {
+        return NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .greaterThanOrEqual, toItem: nil,
+                                  attribute: NSLayoutConstraint.Attribute(rawValue: 0)!,
+                                  multiplier: 1.0, constant: height)
+    }
+
     open class func setWidth(_ width: CGFloat, toView view: UIView) -> NSLayoutConstraint {
         return NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: nil,
                                   attribute: NSLayoutConstraint.Attribute(rawValue: 0)!,
