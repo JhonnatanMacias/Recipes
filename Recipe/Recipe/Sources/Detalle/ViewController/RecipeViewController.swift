@@ -219,7 +219,6 @@ class RecipeViewController: UIViewController {
         edgesForExtendedLayout = []
         transparentNavigationBar()
         addRightBarButtonITem()
-        self.navigationController?.navigationBar.tintColor = .white
     }
 
     private func addRightBarButtonITem() {

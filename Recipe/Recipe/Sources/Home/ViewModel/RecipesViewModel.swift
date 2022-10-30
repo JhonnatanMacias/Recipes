@@ -18,13 +18,14 @@ protocol RecipesViewModelProtocol: AnyObject {
     func displayFavoritiesRecipes(onlyFavorites: Bool)
 
     func viewDidLoad()
-    func getRamdomRecipes()
+    func getRecipes(recipleTitle: String)
 
     // MARK: - Events
 
     var navigateToRecipeDetails: ((RecipeDetailViewModel) -> ())? { get set }
     var displaySpinner: ( () -> ())? { get set }
     var hideSpinner: (() -> ())? { get set }
+    var presentError: (() -> ())? { get set }
     func markPostLikeFavorite(detail: Recipe)
 }
 
@@ -32,6 +33,7 @@ class RecipesViewModel: RecipesViewModelProtocol {
 
     var displaySpinner: (() -> ())?
     var hideSpinner: (() -> ())?
+    var presentError: (() -> ())?
     var recipesModel: Bindable<Recipes> = Bindable(Recipes(recipes: []))
     var recipesFavoritesModel: Bindable<[Recipe]> = Bindable([])
     var recipesAuxModel: Bindable<Recipes> = Bindable(Recipes(recipes: []))
@@ -47,18 +49,49 @@ class RecipesViewModel: RecipesViewModelProtocol {
 
     func getRamdomRecipes() {
         displaySpinner?()
-
         repository.getRamdomRecipes { [weak self] result in
             guard let self = self else {
                 return
             }
 
+            self.hideSpinner?()
             switch result {
             case .success(let recipes):
                 self.setupModel(model: recipes)
-            case .failure(let error):
-                print(error)
+            case .failure(_):
+                self.presentError?()
             }
+        }
+    }
+
+    func getRecipes(recipleTitle: String) {
+        displaySpinner?()
+        repository.getRecipes(title: recipleTitle) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+
+            self.hideSpinner?()
+            switch result {
+            case .success(let recipes):
+                self.setupSearchModel(model: recipes)
+            case .failure(_):
+                self.presentError?()
+            }
+        }
+    }
+
+    private func setupSearchModel(model: SearchRecipe) {
+        let recipesModel = model.results.compactMap { Recipe(title: $0.title, image: $0.image) }
+
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {
+                return
+            }
+
+            let model = Recipes(recipes: recipesModel)
+            self.recipesModel.value = model
+            self.cellsViewModel.value = model.recipes.compactMap { RecipesCellViewModel(model: $0) }
         }
     }
 
@@ -110,21 +143,6 @@ class RecipesViewModel: RecipesViewModelProtocol {
         cellsViewModel.value = recipesAux.compactMap { RecipesCellViewModel(model: $0)
 
         }
-
-//        cellsViewModel.value = postAux.compactMap { PostCellViewModel(model: $0, postDetailViewModel: PostDetailViewModel(model: $0.postDetail)) }
     }
 
-//    func displayFavoritiesPosst(onlyFavorites: Bool) {
-//        var postAux: [Post] = []
-//
-//        if onlyFavorites {
-//            postAux = postModel.value.filter { post in
-//                post.postDetail.isFavorited
-//            }
-//        } else {
-//            postAux = postModel.value
-//        }
-//
-//        cellsViewModel.value = postAux.compactMap { PostCellViewModel(model: $0, postDetailViewModel: PostDetailViewModel(model: $0.postDetail)) }
-//    }
 }

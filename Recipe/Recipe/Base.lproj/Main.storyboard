@@ -48,7 +48,13 @@
                             <constraint firstItem="tYt-FQ-MoX" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="mhm-5N-L5c"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="SLR-oK-1ZL"/>
+                    <navigationItem key="navigationItem" id="SLR-oK-1ZL">
+                        <barButtonItem key="rightBarButtonItem" title="Search" id="U76-mm-MMQ">
+                            <connections>
+                                <action selector="presentSearchView:" destination="BYZ-38-t0r" id="q8g-lO-MtC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="recipesSegmentControl" destination="LP7-UX-eS8" id="3vd-7p-1uz"/>
                     </connections>

@@ -33,6 +33,8 @@
 		CA82B45B290DFEBB003BC31A /* RecipesCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA82B45A290DFEBB003BC31A /* RecipesCellViewModel.swift */; };
 		CA82B461290E224A003BC31A /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA82B460290E224A003BC31A /* RecipeViewController.swift */; };
 		CA82B463290E2B1A003BC31A /* RecipeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA82B462290E2B1A003BC31A /* RecipeDetailViewModel.swift */; };
+		CA82B465290EE314003BC31A /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA82B464290EE314003BC31A /* LoadingViewController.swift */; };
+		CA82B93A290EE512003BC31A /* SearchViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA82B939290EE512003BC31A /* SearchViewcontroller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,8 @@
 		CA82B45A290DFEBB003BC31A /* RecipesCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesCellViewModel.swift; sourceTree = "<group>"; };
 		CA82B460290E224A003BC31A /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		CA82B462290E2B1A003BC31A /* RecipeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewModel.swift; sourceTree = "<group>"; };
+		CA82B464290EE314003BC31A /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		CA82B939290EE512003BC31A /* SearchViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewcontroller.swift; sourceTree = "<group>"; };
 		D42F83D2E2B9DF670435C53E /* Pods-Recipe-RecipeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-RecipeUITests.debug.xcconfig"; path = "Target Support Files/Pods-Recipe-RecipeUITests/Pods-Recipe-RecipeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -218,6 +222,7 @@
 		CA82AF7A290CCD28003BC31A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				CA82B937290EE4EA003BC31A /* Search */,
 				CA82B45C290E1B65003BC31A /* Detalle */,
 				CA82AAA8290CCCE1003BC31A /* Home */,
 			);
@@ -244,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				CA82AA6D290CCA42003BC31A /* ViewController.swift */,
+				CA82B464290EE314003BC31A /* LoadingViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -288,6 +294,22 @@
 			children = (
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		CA82B937290EE4EA003BC31A /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				CA82B938290EE4F5003BC31A /* Viewcontroller */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		CA82B938290EE4F5003BC31A /* Viewcontroller */ = {
+			isa = PBXGroup;
+			children = (
+				CA82B939290EE512003BC31A /* SearchViewcontroller.swift */,
+			);
+			path = Viewcontroller;
 			sourceTree = "<group>";
 		};
 		F672518D8E1C3D122035E75E /* Pods */ = {
@@ -557,6 +579,7 @@
 				CA82AA9F290CCC39003BC31A /* UITableView+Extensions.swift in Sources */,
 				CA82AAA3290CCC73003BC31A /* UIView+Extension.swift in Sources */,
 				CA82AAA5290CCC8C003BC31A /* ConstraintUtil.swift in Sources */,
+				CA82B465290EE314003BC31A /* LoadingViewController.swift in Sources */,
 				CA82AA9B290CCBF2003BC31A /* BaseService.swift in Sources */,
 				CA82AAA1290CCC57003BC31A /* Bindable.swift in Sources */,
 				CA82B459290DFBC7003BC31A /* UIColor+Extension.swift in Sources */,
@@ -565,6 +588,7 @@
 				CA82AA6A290CCA42003BC31A /* AppDelegate.swift in Sources */,
 				CA82B45B290DFEBB003BC31A /* RecipesCellViewModel.swift in Sources */,
 				CA82B461290E224A003BC31A /* RecipeViewController.swift in Sources */,
+				CA82B93A290EE512003BC31A /* SearchViewcontroller.swift in Sources */,
 				CA82AA6C290CCA42003BC31A /* SceneDelegate.swift in Sources */,
 				CA82B457290DFACF003BC31A /* RecipesViewCell.swift in Sources */,
 				CA82AF80290CD4F4003BC31A /* RecipesServices.swift in Sources */,

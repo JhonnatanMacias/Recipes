@@ -87,25 +87,6 @@ class RecipesViewCell: UITableViewCell {
                 self.starImageBtn.isSelected = isFavorited
 
             }
-
-//            viewModel.postDetail.bindAndFire { [weak self] detail in
-//                guard let self = self else {
-//                    return
-//                }
-//
-//                self.starImageBtn.isHidden = !detail.isFavorited
-//                self.starImageBtn.isSelected = detail.isFavorited
-//            }
-//
-//            viewModel.postDetailViewModel.bindAndFire { [weak self] postDetailViewModel in
-//                guard let self = self else {
-//                    return
-//                }
-//
-//                if postDetailViewModel.postModel.value.isFavorited {
-//                    self.viewModel.postDetail.value.isFavorited = true
-//                }
-//            }
         }
     }
 
@@ -117,9 +98,6 @@ class RecipesViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        if selected {
-//            viewModel.read.value = true
-        }
     }
 
     // MARK: - Initializer
@@ -143,15 +121,6 @@ class RecipesViewCell: UITableViewCell {
 
         contentView.addSubview(containerView)
         NSLayoutConstraint.activate(ConstraintUtil.pinAllSides(of: containerView, to: contentView))
-
-//        contentView.addSubview(dividerView)
-//        NSLayoutConstraint.activate([ConstraintUtil.pinRightOfView(dividerView,
-//                                                                   toRightOfView: containerView, withMargin:
-//                                                                    -Constants.readIconLeftMargin),
-//                                     ConstraintUtil.pinBottomOfView(dividerView, toBottomOfView: containerView),
-//                                     ConstraintUtil.pinLeftOfView(dividerView, toLeftOfView: containerView, withMargin: Constants.readIconLeftMargin),
-//                                     ConstraintUtil.setHeight(1, toView: dividerView)
-//                                    ])
 
         contentView.addSubview(recipeImage)
         NSLayoutConstraint.activate([ConstraintUtil.pinLeftOfView(recipeImage,

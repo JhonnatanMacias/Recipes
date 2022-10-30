@@ -18,13 +18,13 @@ class ViewController: UIViewController {
 
     // MARK: - Properties
 
-    private let searchController = UISearchController(searchResultsController: nil)
     private var tableView: UITableView = {
         let tableView = UITableView.newAutolayoutTableView()
         return tableView
     }()
 
     @IBOutlet private weak var recipesSegmentControl: UISegmentedControl!
+    private let loadingVC = LoadingViewController()
 
     private var viewModel: RecipesViewModelProtocol? {
         didSet {
@@ -60,8 +60,37 @@ class ViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             }
+
+            viewModel?.displaySpinner = { [weak self]  in
+                guard let self = self else {
+                      return
+                }
+
+                self.displaySpinner()
+            }
+
+            viewModel?.hideSpinner = { [weak self]  in
+                guard let self = self else {
+                      return
+                }
+
+                self.hideSpinner()
+            }
+
+            viewModel?.presentError = { [weak self] in
+                guard let self = self else {
+                    return
+                }
+
+                self.presentError()
+            }
         }
         
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        transparentNavigationBar()
     }
 
     override func viewDidLoad() {
@@ -83,8 +112,36 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
 
         setupTableView()
-        setupSearchView()
         setupSegmentedControlStyle()
+    }
+
+    func transparentNavigationBar() {
+        if let navigationController = self.navigationController {
+            navigationController.navigationBar.setBackgroundImage(nil,for: UIBarMetrics.default)
+            navigationController.navigationBar.shadowImage = nil
+            navigationController.navigationBar.isTranslucent = true
+            navigationController.view.backgroundColor = UIColor.clear
+           navigationController.navigationBar.backgroundColor = UIColor.clear
+        }
+    }
+
+    // MARK: - Internal Functions
+
+    func displaySpinner() {
+        // Animate loadingVC over the existing views on screen
+        loadingVC.modalPresentationStyle = .overCurrentContext
+        loadingVC.modalTransitionStyle = .crossDissolve
+
+        present(loadingVC, animated: true, completion: nil)
+    }
+
+    func hideSpinner() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+
+            self.loadingVC.dismiss(animated: true, completion: nil)
+        }
+
     }
 
     private func constructSubviewHierarchy() {
@@ -100,14 +157,6 @@ class ViewController: UIViewController {
                                      ConstraintUtil.pinBottomOfView(tableView, toBottomOfView: view)
         ])
 
-    }
-
-    private func setupSearchView() {
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Recipes"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
     }
 
     @objc private func favoritePost(aNotification: NSNotification) {
@@ -133,16 +182,18 @@ class ViewController: UIViewController {
         recipesSegmentControl.layer.masksToBounds = true
     }
 
-    private func hideNavigationBarBackBtnTitle() {
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-    }
-
     private func setupTableView() {
         tableView.register(RecipesViewCell.self, forCellReuseIdentifier: Constants.recipesCellIdentifier)
         tableView.separatorStyle = .none
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .systemGray6
+    }
+
+    @IBAction private func presentSearchView(_ sender: Any) {
+        let searchView = SearchViewcontroller()
+        self.navigationController?.pushViewController(searchView,
+                                                      animated: true)
     }
 
     @IBAction func handleSegmentAction(_ sender: UISegmentedControl) {
@@ -152,13 +203,18 @@ class ViewController: UIViewController {
             viewModel?.displayFavoritiesRecipes(onlyFavorites: true)
         }
     }
-}
 
-extension ViewController: UISearchResultsUpdating {
+    private func presentError() {
+        DispatchQueue.main.async { [weak self] in
+            let alert = UIAlertController(title: "Error", message: "Ooops! Un error ocurrió, intenté nuevamente",
+                                          preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK",
+                                          style: UIAlertAction.Style.default,
+                                          handler: nil))
+            self?.present(alert, animated: true, completion: nil)
+        }
+    }
 
-    func updateSearchResults(for searchController: UISearchController) {
-    // TODO
-  }
 }
 
 extension ViewController: UITableViewDataSource {

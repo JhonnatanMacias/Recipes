@@ -39,6 +39,27 @@ struct Recipe: Codable {
     }
 
     init() {}
+
+    init(searchResult: SearchRecipeResult) {
+        self.title = searchResult.title
+        self.image = searchResult.image
+    }
+
+    init(title: String, image: String) {
+        self.title = title
+        self.image = image
+    }
 }
 
+// MARK: - Welcome
+struct SearchRecipe: Codable {
+    let results: [SearchRecipeResult]
+    let offset, number, totalResults: Int
+}
 
+// MARK: - Result
+struct SearchRecipeResult: Codable {
+    let id: Int
+    let title: String
+    let image: String
+}
